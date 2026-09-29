@@ -1,0 +1,11 @@
+# Used only when the domain's document root is this folder (shared hosting
+# that can't point the domain at public/). Sends every request into public/
+# so .env, vendor/, storage/ etc. are never reachable from the web.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<FilesMatch "^\.env|composer\.(json|lock)|artisan$">
+    Require all denied
+</FilesMatch>
