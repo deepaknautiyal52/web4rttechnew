@@ -18,6 +18,7 @@
     'total' => $page->total(),
 ])
 
+
 @include('admin.resource.toolbar', [
     'searchPlaceholder' => 'Search by record name...',
     'filters' => [
