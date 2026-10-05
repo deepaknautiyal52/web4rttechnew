@@ -47,7 +47,7 @@
           "postalCode": "248001",
           "addressCountry": "IN"
         },
-        "telephone": "+91-8979528858",
+        "telephone": "+91-7417120232",
         "email": "info@web4rttech.com",
         "priceRange": "$$"
       }
