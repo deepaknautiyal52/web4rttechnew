@@ -110,8 +110,8 @@
         <div class="container">
             <h2>Beyond Technology</h2>
             <p class="ventures-section-intro">
-                The Web4rtTech family also runs homestays in Uttarakhand, a real estate business, and yoga &amp; wellness
-                programmes, each with its own website.
+                The Web4rtTech family also runs homestays in Uttarakhand, a real estate business, yoga &amp; wellness
+                programmes, and CCTV security &amp; surveillance services.
             </p>
             @include('partials.venture-grid')
             <div class="services-view-all">

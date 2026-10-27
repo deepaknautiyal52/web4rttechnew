@@ -1028,6 +1028,21 @@ return [
             ],
             'color' => '#7C3AED',
         ],
+        [
+            'id' => 'security',
+            'name' => 'Security & Surveillance',
+            'category' => 'Security',
+            'url' => '',
+            'tagline' => 'CCTV for government and private sites',
+            'description' => 'CCTV and surveillance systems for government departments and private organisations: offices, schools, factories, shops and housing societies.',
+            'highlights' => [
+                'Site survey and system design',
+                'HD and IP camera installation',
+                'Remote viewing on your phone',
+                'Annual maintenance contracts (AMC)',
+            ],
+            'color' => '#0284C7',
+        ],
     ],
     'fallback_articles' => [
         [

@@ -20,6 +20,12 @@
                             <path d="M12 20c4 0 8-2.5 9-7-3 0-6 1.5-9 7Z" />
                             <path d="M12 20c-2.5-3-2.5-9 0-14 2.5 5 2.5 11 0 14Z" />
                             @break
+                        @case('security')
+                            <path d="M3 6.5 17 4l1.5 6L4.5 12.5Z" />
+                            <path d="m18.5 10 2.5-.5" />
+                            <path d="m10 11.3.8 3.7H6v5" />
+                            <path d="M3 20h6" />
+                            @break
                     @endswitch
                 </svg>
             </div>
