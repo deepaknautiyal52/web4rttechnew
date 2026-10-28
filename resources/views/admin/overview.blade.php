@@ -10,20 +10,28 @@
     $stats = [];
     if (isset($a['receivables'])) {
         $r = $a['receivables'];
-        $stats[] = ['label' => 'Outstanding', 'value' => Meta::money($r['outstanding']), 'sub' => $r['outstanding_count'].' unpaid invoice'.($r['outstanding_count'] === 1 ? '' : 's'), 'to' => route('admin.invoices.index')];
-        $stats[] = ['label' => 'Overdue', 'value' => Meta::money($r['overdue_total']), 'sub' => count($r['overdue']).' past due', 'tone' => $r['overdue_total'] > 0 ? 'expense-text' : null, 'to' => route('admin.invoices.index')];
+        $stats[] = ['label' => 'Outstanding', 'value' => Meta::money($r['outstanding']), 'sub' => $r['outstanding_count'].' unpaid invoice'.($r['outstanding_count'] === 1 ? '' : 's'), 'to' => route('admin.invoices.index'), 'icon' => 'receipt', 'accent' => '#4F46E5'];
+        $stats[] = ['label' => 'Overdue', 'value' => Meta::money($r['overdue_total']), 'sub' => count($r['overdue']).' past due', 'tone' => $r['overdue_total'] > 0 ? 'expense-text' : null, 'to' => route('admin.invoices.index'), 'icon' => 'alert', 'accent' => '#DC2626'];
     }
     if (isset($a['projects'])) {
         $p = $a['projects'];
-        $stats[] = ['label' => 'Active projects', 'value' => $p['active'], 'sub' => count($p['overdue']).' late · '.count($p['over_budget']).' over budget', 'to' => route('admin.projects.index')];
+        $stats[] = ['label' => 'Active projects', 'value' => $p['active'], 'sub' => count($p['overdue']).' late · '.count($p['over_budget']).' over budget', 'to' => route('admin.projects.index'), 'icon' => 'briefcase', 'accent' => '#0891B2'];
     }
     if (isset($a['tickets'])) {
         $t = $a['tickets'];
-        $stats[] = ['label' => 'Open tickets', 'value' => $t['open'], 'sub' => $t['breached'].' past SLA · '.$t['urgent'].' high/urgent', 'tone' => $t['breached'] > 0 ? 'expense-text' : null, 'to' => route('admin.tickets.index')];
+        $stats[] = ['label' => 'Open tickets', 'value' => $t['open'], 'sub' => $t['breached'].' past SLA · '.$t['urgent'].' high/urgent', 'tone' => $t['breached'] > 0 ? 'expense-text' : null, 'to' => route('admin.tickets.index'), 'icon' => 'lifebuoy', 'accent' => '#D97706'];
     }
     if (array_key_exists('monthly_burn', $a)) {
-        $stats[] = ['label' => 'Monthly burn', 'value' => Meta::money($a['monthly_burn']), 'sub' => 'Recurring expenses', 'to' => route('admin.finances.index')];
+        $stats[] = ['label' => 'Monthly burn', 'value' => Meta::money($a['monthly_burn']), 'sub' => 'Recurring expenses', 'to' => route('admin.finances.index'), 'icon' => 'wallet', 'accent' => '#7C3AED'];
     }
+
+    $now = now(config('app.display_timezone'));
+    $greeting = $now->hour < 12 ? 'Good morning' : ($now->hour < 17 ? 'Good afternoon' : 'Good evening');
+    $quickLinks = array_filter([
+        $user->canAccess('leads') ? ['url' => route('admin.leads.index'), 'label' => 'Leads', 'icon' => 'inbox'] : null,
+        $user->canAccess('invoices') ? ['url' => route('admin.invoices.index'), 'label' => 'Invoices', 'icon' => 'receipt'] : null,
+        $user->canAccess('projects') ? ['url' => route('admin.projects.index'), 'label' => 'Projects', 'icon' => 'briefcase'] : null,
+    ]);
 
     $riskProjects = [];
     if (isset($a['projects'])) {
@@ -86,22 +94,32 @@
 @endphp
 
 @section('content')
-<div class="admin-page-header">
-    <div>
-        <h1>Welcome back{{ $user->name ? ', '.$user->name : '' }}</h1>
-        <p>What needs attention today, plus inquiry volume and business performance at a glance.</p>
+<section class="admin-welcome">
+    <div class="admin-welcome-copy">
+        <span class="admin-welcome-date">
+            @include('admin.partials.icon', ['name' => 'calendar', 'class' => 'admin-welcome-date-icon'])
+            {{ $now->format('l, j F Y') }}
+        </span>
+        <h1>{{ $greeting }}{{ $user->name ? ', '.$user->name : '' }}</h1>
+        <p>Here is what needs attention today, plus inquiry volume and business performance at a glance.</p>
     </div>
-</div>
+    @if (count($quickLinks))
+        <div class="admin-welcome-actions">
+            @foreach ($quickLinks as $q)
+                <a href="{{ $q['url'] }}" class="admin-welcome-btn">
+                    @include('admin.partials.icon', ['name' => $q['icon'], 'class' => 'admin-welcome-btn-icon'])
+                    {{ $q['label'] }}
+                </a>
+            @endforeach
+        </div>
+    @endif
+</section>
 
 {{-- What needs doing today --}}
 @if (count($stats))
     <div class="admin-stat-grid attention-stats">
         @foreach ($stats as $s)
-            <a href="{{ $s['to'] }}" class="admin-stat-card attention-stat">
-                <span class="admin-stat-label">{{ $s['label'] }}</span>
-                <span class="admin-stat-value admin-stat-value-small{{ !empty($s['tone']) ? ' admin-stat-value-flat '.$s['tone'] : '' }}">{{ $s['value'] }}</span>
-                <span class="admin-stat-sub">{{ $s['sub'] }}</span>
-            </a>
+            @include('admin.partials.stat', $s + ['href' => $s['to']])
         @endforeach
     </div>
 @endif
@@ -122,7 +140,10 @@
                     <a href="{{ route('admin.leads.index') }}" class="admin-panel-link">View all →</a>
                 </div>
                 @if (count($a['follow_ups']) === 0)
-                    <div class="client-section-empty">No follow-ups due. 🎉</div>
+                    <div class="attention-empty">
+                        @include('admin.partials.icon', ['name' => 'check', 'class' => 'attention-empty-icon'])
+                        <span><strong>All caught up</strong>No follow-ups due right now.</span>
+                    </div>
                 @else
                     <ul>
                         @foreach ($a['follow_ups'] as $c)
@@ -160,7 +181,10 @@
                     <a href="{{ route('admin.renewals.index') }}" class="admin-panel-link">View all →</a>
                 </div>
                 @if (count($a['renewals']) === 0)
-                    <div class="client-section-empty">Nothing expiring in the next 30 days.</div>
+                    <div class="attention-empty">
+                        @include('admin.partials.icon', ['name' => 'check', 'class' => 'attention-empty-icon'])
+                        <span><strong>Nothing to renew</strong>Nothing expires in the next 30 days.</span>
+                    </div>
                 @else
                     <ul>
                         @foreach ($a['renewals'] as $r)
@@ -213,22 +237,14 @@
 @if ($contacts !== null)
     <h2 class="admin-section-title">Inquiries</h2>
     <div class="admin-stat-grid">
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Total Inquiries</span>
-            <span class="admin-stat-value">{{ $leadStats['total'] }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Won Deals</span>
-            <span class="admin-stat-value">{{ $leadStats['won'] }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Total Revenue</span>
-            <span class="admin-stat-value">{{ Meta::usd($leadStats['totalRevenue']) }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Win Rate</span>
-            <span class="admin-stat-value">{{ $leadStats['winRate'] === null ? '—' : $leadStats['winRate'].'%' }}</span>
-        </div>
+        @foreach ([
+            ['label' => 'Total inquiries', 'value' => $leadStats['total'], 'icon' => 'inbox', 'accent' => '#4F46E5'],
+            ['label' => 'Won deals', 'value' => $leadStats['won'], 'icon' => 'trophy', 'accent' => '#059669'],
+            ['label' => 'Total revenue', 'value' => Meta::usd($leadStats['totalRevenue']), 'icon' => 'trend', 'accent' => '#0891B2'],
+            ['label' => 'Win rate', 'value' => $leadStats['winRate'] === null ? '—' : $leadStats['winRate'].'%', 'icon' => 'percent', 'accent' => '#D97706'],
+        ] as $s)
+            @include('admin.partials.stat', $s)
+        @endforeach
     </div>
 
     @include('admin.partials.period-toggle')
@@ -276,22 +292,14 @@
     {{-- Sales pipeline --}}
     <h2 class="admin-section-title">Sales pipeline</h2>
     <div class="admin-stat-grid">
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Open deals</span>
-            <span class="admin-stat-value">{{ $insights['open'] }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Average deal size</span>
-            <span class="admin-stat-value admin-stat-value-small">{{ $insights['avgDeal'] === null ? '—' : Meta::usd($insights['avgDeal']) }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Average time to win</span>
-            <span class="admin-stat-value admin-stat-value-small">{{ $insights['avgDays'] === null ? '—' : $insights['avgDays'].' day'.($insights['avgDays'] === 1 ? '' : 's') }}</span>
-        </div>
-        <div class="admin-stat-card">
-            <span class="admin-stat-label">Deals lost</span>
-            <span class="admin-stat-value">{{ $insights['lostTotal'] }}</span>
-        </div>
+        @foreach ([
+            ['label' => 'Open deals', 'value' => $insights['open'], 'icon' => 'briefcase', 'accent' => '#4F46E5'],
+            ['label' => 'Average deal size', 'value' => $insights['avgDeal'] === null ? '—' : Meta::usd($insights['avgDeal']), 'icon' => 'wallet', 'accent' => '#0891B2'],
+            ['label' => 'Average time to win', 'value' => $insights['avgDays'] === null ? '—' : $insights['avgDays'].' day'.($insights['avgDays'] === 1 ? '' : 's'), 'icon' => 'clock', 'accent' => '#7C3AED'],
+            ['label' => 'Deals lost', 'value' => $insights['lostTotal'], 'icon' => 'alert', 'accent' => '#DC2626'],
+        ] as $s)
+            @include('admin.partials.stat', $s)
+        @endforeach
     </div>
 
     <div class="admin-chart-grid insights-grid">

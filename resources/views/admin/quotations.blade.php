@@ -43,10 +43,10 @@
                 @foreach ($page as $q)
                     @php
                         $expired = $q->valid_until && $q->valid_until->toDateString() < $today && in_array($q->status, ['draft', 'sent'], true);
-                        $before = '<button type="button" title="Print / save as PDF" data-href="'.e(route('admin.print', ['quotation', $q->id])).'" data-target="_blank">🖨️</button>';
+                        $before = '<button type="button" title="Print / save as PDF" data-href="'.e(route('admin.print', ['quotation', $q->id])).'" data-target="_blank">'.\App\Support\AdminNav::icon('printer').'</button>';
                         if ($q->status !== 'rejected') {
                             $before .= '<form method="POST" action="'.e(route('admin.quotations.invoice', $q->id)).'" style="display:inline" data-confirm="'.e('Create a draft invoice from '.$q->number.'? The quotation will be marked accepted.').'">'
-                                .csrf_field().'<button type="submit" title="Create invoice from this quotation">🧾</button></form>';
+                                .csrf_field().'<button type="submit" title="Create invoice from this quotation">'.\App\Support\AdminNav::icon('receipt').'</button></form>';
                         }
                     @endphp
                     <tr>

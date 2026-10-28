@@ -30,7 +30,10 @@
                     @include('admin.resource.field', ['field' => $field, 'value' => $val($field['name'])])
                 @endforeach
             </div>
-            <button type="submit" class="admin-settings-btn">{{ $isEdit ? 'Save changes' : 'Create '.$formTitle }}</button>
+            <div class="admin-form-actions">
+                <a href="{{ $listUrl }}" class="admin-secondary-btn">Cancel</a>
+                <button type="submit" class="admin-settings-btn">{{ $isEdit ? 'Save changes' : 'Create '.$formTitle }}</button>
+            </div>
         </form>
     </div>
 @endif

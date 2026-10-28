@@ -353,15 +353,34 @@
     };
   }
 
-  var GRID = '#e1e0d9';
-  var AXIS = '#c3c2b7';
-  var TICK = { color: '#898781', font: { size: 12 } };
+  var GRID = '#EEF0F5';
+  var AXIS = '#E2E6EF';
+  var TICK = { color: '#94A3B8', font: { size: 12 } };
 
   function prepareBox(id) {
     var canvas = document.getElementById(id);
     if (!canvas || !window.Chart) return null;
+    Chart.defaults.font.family = "'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif";
     canvas.parentNode.style.position = 'relative';
     return canvas;
+  }
+
+  // '#4F46E5' + 0.2 -> 'rgba(79, 70, 229, 0.2)'
+  function withAlpha(hex, alpha) {
+    var n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + (n >> 16) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255) + ', ' + alpha + ')';
+  }
+
+  // Vertical fade under a line, sized to the plot area once it is known.
+  function areaFill(color) {
+    return function (ctx) {
+      var area = ctx.chart.chartArea;
+      if (!area) return withAlpha(color, 0.1);
+      var g = ctx.chart.ctx.createLinearGradient(0, area.top, 0, area.bottom);
+      g.addColorStop(0, withAlpha(color, 0.22));
+      g.addColorStop(1, withAlpha(color, 0));
+      return g;
+    };
   }
 
   function lineChart(id, color, format, tickFormat, integer) {
@@ -372,11 +391,14 @@
       data: { labels: [], datasets: [{
         data: [],
         borderColor: color,
-        borderWidth: 2,
+        borderWidth: 2.5,
         tension: 0.35,
+        cubicInterpolationMode: 'monotone',
+        fill: 'origin',
+        backgroundColor: areaFill(color),
         spanGaps: false,
-        pointRadius: 4,
-        pointHoverRadius: 5,
+        pointRadius: 3,
+        pointHoverRadius: 6,
         pointBackgroundColor: color,
         pointBorderColor: '#fff',
         pointBorderWidth: 2
@@ -413,7 +435,7 @@
         data: values,
         backgroundColor: color,
         hoverBackgroundColor: color,
-        borderRadius: { topRight: 4, bottomRight: 4 },
+        borderRadius: { topRight: 6, bottomRight: 6 },
         borderSkipped: 'left',
         maxBarThickness: 22
       }] },
@@ -437,7 +459,7 @@
           y: {
             grid: { display: false },
             border: { display: false },
-            ticks: { color: '#52514e', font: { size: 12 } }
+            ticks: { color: '#475569', font: { size: 12 } }
           }
         }
       }

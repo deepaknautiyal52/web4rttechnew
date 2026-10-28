@@ -22,16 +22,8 @@
 ])
 
 <div class="admin-stat-grid admin-stat-grid-2">
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Outstanding receivables</span>
-        <span class="admin-stat-value admin-stat-value-small">{{ Meta::money($receivables['outstanding']) }}</span>
-        <span class="admin-stat-sub">{{ $receivables['count'] }} unpaid invoice{{ $receivables['count'] === 1 ? '' : 's' }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Overdue</span>
-        <span class="admin-stat-value admin-stat-value-small admin-stat-value-flat {{ $receivables['overdue'] > 0 ? 'expense-text' : '' }}">{{ Meta::money($receivables['overdue']) }}</span>
-        <span class="admin-stat-sub">{{ $receivables['overdueCount'] }} past due date</span>
-    </div>
+    @include('admin.partials.stat', ['label' => 'Outstanding receivables', 'value' => Meta::money($receivables['outstanding']), 'icon' => 'receipt', 'accent' => '#4F46E5', 'sub' => $receivables['count'].' unpaid invoice'.($receivables['count'] === 1 ? '' : 's')])
+    @include('admin.partials.stat', ['label' => 'Overdue', 'value' => Meta::money($receivables['overdue']), 'tone' => $receivables['overdue'] > 0 ? 'expense-text' : null, 'icon' => 'alert', 'accent' => '#DC2626', 'sub' => $receivables['overdueCount'].' past due date'])
 </div>
 
 @include('admin.resource.toolbar', [
@@ -85,7 +77,7 @@
                             'row' => $i,
                             'deleteUrl' => route('admin.invoices.destroy', $i->id),
                             'deleteLabel' => $i->number,
-                            'before' => '<button type="button" title="Print / save as PDF" data-href="'.e(route('admin.print', ['invoice', $i->id])).'" data-target="_blank">🖨️</button>',
+                            'before' => '<button type="button" title="Print / save as PDF" data-href="'.e(route('admin.print', ['invoice', $i->id])).'" data-target="_blank">'.\App\Support\AdminNav::icon('printer').'</button>',
                         ])
                     </tr>
                     <tr class="admin-table-detail-row resource-detail-row" id="invoice-{{ $i->id }}" @if (!$expanded) hidden @endif>
@@ -108,7 +100,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="_back" value="{{ $listUrl }}" />
-                                                            <button type="submit" title="Remove payment">🗑️</button>
+                                                            <button type="submit" title="Remove payment" aria-label="Remove payment" class="row-action-danger">@include('admin.partials.icon', ['name' => 'trash', 'class' => ''])</button>
                                                         </form>
                                                     </td>
                                                 </tr>

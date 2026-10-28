@@ -48,7 +48,7 @@
                     @php
                         $renew = '<form method="POST" action="'.e(route('admin.renewals.renew', $r->id)).'" style="display:inline" data-confirm="'.e('Mark '.$r->name.' as renewed for another '.str_replace('ly', '', $r->billing_cycle).'?').'">'
                             .csrf_field().'<input type="hidden" name="_back" value="'.e($listUrl).'" />'
-                            .'<button type="submit" title="Mark as renewed (extend by one billing cycle)">🔄</button></form>';
+                            .'<button type="submit" title="Mark as renewed (extend by one billing cycle)">'.\App\Support\AdminNav::icon('refresh').'</button></form>';
                     @endphp
                     <tr>
                         <td><x-badge :meta="Meta::RENEWAL_TYPE" :value="$r->type" /></td>

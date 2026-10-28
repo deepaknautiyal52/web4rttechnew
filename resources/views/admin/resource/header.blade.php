@@ -3,18 +3,13 @@
     $createUrl = $listUrl.(str_contains($listUrl, '?') ? '&' : '?').'create=1';
 @endphp
 <div class="admin-page-header">
-    <div>
-        <h1>{{ $title }}</h1>
-        @if (!empty($subtitle))
-            <p>{{ $subtitle }}</p>
-        @endif
-    </div>
+    @include('admin.partials.page-title', ['title' => $title, 'subtitle' => $subtitle ?? null])
     <div class="admin-header-actions">
         @isset($total)
             <span class="admin-total-count">{{ $total }} total</span>
         @endisset
         @if (!empty($exportType))
-            <a href="{{ route('admin.export', $exportType) }}" class="admin-secondary-btn">⬇ Export CSV</a>
+            <a href="{{ route('admin.export', $exportType) }}" class="admin-secondary-btn">@include('admin.partials.icon', ['name' => 'download', 'class' => 'admin-btn-icon']) Export CSV</a>
         @endif
         @if (!empty($addLabel))
             <a href="{{ $createUrl }}" class="admin-add-btn">{{ $addLabel }}</a>

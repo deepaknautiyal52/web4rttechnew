@@ -7,13 +7,10 @@
 
 @section('content')
 <div class="admin-page-header">
-    <div>
-        <h1>Leads</h1>
-        <p>Everyone who has reached out through the site, and where each deal stands.</p>
-    </div>
+    @include('admin.partials.page-title', ['title' => 'Leads', 'subtitle' => 'Everyone who has reached out through the site, and where each deal stands.'])
     <div class="admin-header-actions">
         <span class="admin-total-count">{{ $page->total() }} total</span>
-        <a href="{{ route('admin.export', 'leads') }}" class="admin-secondary-btn">⬇ Export CSV</a>
+        <a href="{{ route('admin.export', 'leads') }}" class="admin-secondary-btn">@include('admin.partials.icon', ['name' => 'download', 'class' => 'admin-btn-icon']) Export CSV</a>
     </div>
 </div>
 

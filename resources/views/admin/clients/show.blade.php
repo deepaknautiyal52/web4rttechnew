@@ -9,14 +9,12 @@
 @endphp
 
 @section('content')
-<a href="{{ route('admin.clients.index') }}" class="admin-panel-link">← All clients</a>
+<a href="{{ route('admin.clients.index') }}" class="admin-breadcrumb">← All clients</a>
 <div class="admin-page-header client-header">
-    <div>
-        <h1>{{ $client->company ?: $client->name }}</h1>
-        <p>
-            @if ($client->company){{ $client->name }} · @endif{{ $client->email ?: 'No email' }} · {{ $client->phone ?: 'No phone' }}@if ($client->gst_number) · GST {{ $client->gst_number }}@endif
-        </p>
-    </div>
+    @include('admin.partials.page-title', [
+        'title' => $client->company ?: $client->name,
+        'subtitle' => ($client->company ? $client->name.' · ' : '').($client->email ?: 'No email').' · '.($client->phone ?: 'No phone').($client->gst_number ? ' · GST '.$client->gst_number : ''),
+    ])
     <div class="admin-header-actions">
         <x-badge :meta="Meta::ACTIVE_STATUS" :value="$client->status" />
         <a href="{{ route('admin.clients.index') }}?edit={{ $client->id }}" class="admin-secondary-btn">Edit client</a>
@@ -33,22 +31,10 @@
 @endif
 
 <div class="admin-stat-grid">
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Projects</span>
-        <span class="admin-stat-value">{{ $client->projects->count() }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Invoiced</span>
-        <span class="admin-stat-value admin-stat-value-small">{{ Meta::money($invoiced) }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Received</span>
-        <span class="admin-stat-value admin-stat-value-small admin-stat-value-flat income-text">{{ Meta::money($received) }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Outstanding</span>
-        <span class="admin-stat-value admin-stat-value-small admin-stat-value-flat {{ $outstanding > 0 ? 'expense-text' : '' }}">{{ Meta::money($outstanding) }}</span>
-    </div>
+    @include('admin.partials.stat', ['label' => 'Projects', 'value' => $client->projects->count(), 'icon' => 'briefcase', 'accent' => '#4F46E5'])
+    @include('admin.partials.stat', ['label' => 'Invoiced', 'value' => Meta::money($invoiced), 'icon' => 'receipt', 'accent' => '#0891B2'])
+    @include('admin.partials.stat', ['label' => 'Received', 'value' => Meta::money($received), 'tone' => 'income-text', 'icon' => 'trend', 'accent' => '#059669'])
+    @include('admin.partials.stat', ['label' => 'Outstanding', 'value' => Meta::money($outstanding), 'tone' => $outstanding > 0 ? 'expense-text' : null, 'icon' => 'alert', 'accent' => '#DC2626'])
 </div>
 
 @if ($client->billing_address || $client->notes || $client->website)

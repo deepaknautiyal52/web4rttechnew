@@ -48,7 +48,7 @@
                             'row' => $a,
                             'deleteUrl' => route('admin.news.destroy', $a->id),
                             'deleteLabel' => $a->title,
-                            'before' => $a->is_published ? '<button type="button" title="View on site" data-href="'.e(url('/news/'.$a->slug)).'" data-target="_blank">🔗</button>' : '',
+                            'before' => $a->is_published ? '<button type="button" title="View on site" data-href="'.e(url('/news/'.$a->slug)).'" data-target="_blank">'.\App\Support\AdminNav::icon('link').'</button>' : '',
                         ])
                     </tr>
                 @endforeach

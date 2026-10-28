@@ -20,12 +20,9 @@
 
 @section('content')
 <div class="admin-page-header">
-    <div>
-        <h1>Company Finances</h1>
-        <p>Domain, hosting, and salary costs alongside sales &amp; income.</p>
-    </div>
+    @include('admin.partials.page-title', ['title' => 'Company Finances', 'subtitle' => 'Domain, hosting, and salary costs alongside sales & income.'])
     <div class="admin-header-actions">
-        <a href="{{ route('admin.export', 'finances') }}" class="admin-secondary-btn">⬇ Export CSV</a>
+        <a href="{{ route('admin.export', 'finances') }}" class="admin-secondary-btn">@include('admin.partials.icon', ['name' => 'download', 'class' => 'admin-btn-icon']) Export CSV</a>
         <a href="{{ route('admin.finances.index') }}?create=1" class="admin-add-btn">+ Add Entry</a>
     </div>
 </div>
@@ -124,29 +121,19 @@
                 <textarea id="notes" name="notes" rows="3" placeholder="Optional details...">{{ $f('notes') }}</textarea>
             </div>
 
-            <button type="submit" class="admin-settings-btn">{{ $editing ? 'Update Entry' : 'Add Entry' }}</button>
+            <div class="admin-form-actions">
+                <a href="{{ route('admin.finances.index') }}" class="admin-secondary-btn">Cancel</a>
+                <button type="submit" class="admin-settings-btn">{{ $editing ? 'Update Entry' : 'Add Entry' }}</button>
+            </div>
         </form>
     </div>
 @endif
 
 <div class="admin-stat-grid">
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Total Income</span>
-        <span class="admin-stat-value admin-stat-value-flat income-text">{{ Meta::money($stats['totalIncome']) }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Total Expenses</span>
-        <span class="admin-stat-value admin-stat-value-flat expense-text">{{ Meta::money($stats['totalExpense']) }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Net</span>
-        <span class="admin-stat-value admin-stat-value-flat {{ $stats['net'] >= 0 ? 'income-text' : 'expense-text' }}">{{ $stats['net'] >= 0 ? '+' : '-' }}{{ Meta::money(abs($stats['net'])) }}</span>
-    </div>
-    <div class="admin-stat-card">
-        <span class="admin-stat-label">Monthly Burn</span>
-        <span class="admin-stat-value admin-stat-value-flat expense-text">{{ Meta::money($stats['monthlyBurn']) }}</span>
-        <span class="admin-stat-sub">{{ $stats['recurringCount'] }} recurring expense{{ $stats['recurringCount'] === 1 ? '' : 's' }}</span>
-    </div>
+    @include('admin.partials.stat', ['label' => 'Total income', 'value' => Meta::money($stats['totalIncome']), 'tone' => 'income-text', 'icon' => 'trend', 'accent' => '#059669'])
+    @include('admin.partials.stat', ['label' => 'Total expenses', 'value' => Meta::money($stats['totalExpense']), 'tone' => 'expense-text', 'icon' => 'receipt', 'accent' => '#DC2626'])
+    @include('admin.partials.stat', ['label' => 'Net', 'value' => ($stats['net'] >= 0 ? '+' : '-').Meta::money(abs($stats['net'])), 'tone' => $stats['net'] >= 0 ? 'income-text' : 'expense-text', 'icon' => 'wallet', 'accent' => '#4F46E5'])
+    @include('admin.partials.stat', ['label' => 'Monthly burn', 'value' => Meta::money($stats['monthlyBurn']), 'tone' => 'expense-text', 'icon' => 'refresh', 'accent' => '#D97706', 'sub' => $stats['recurringCount'].' recurring expense'.($stats['recurringCount'] === 1 ? '' : 's')])
 </div>
 
 @include('admin.partials.period-toggle')
@@ -220,11 +207,11 @@
                             <td class="{{ $entry->type === 'income' ? 'finance-amount-income' : 'finance-amount-expense' }}">{{ Meta::money($entry->amount, $entry->currency) }}</td>
                             <td>{{ $start }}{{ $end && $end !== $start ? ' → '.$end : '' }}</td>
                             <td class="finance-row-actions">
-                                <button type="button" data-href="{{ route('admin.finances.index') }}?edit={{ $entry->id }}" title="Edit">✏️</button>
+                                <button type="button" data-href="{{ route('admin.finances.index') }}?edit={{ $entry->id }}" title="Edit" aria-label="Edit">@include('admin.partials.icon', ['name' => 'edit', 'class' => ''])</button>
                                 <form method="POST" action="{{ route('admin.finances.destroy', $entry->id) }}" style="display:inline" data-confirm="Delete &quot;{{ $entry->title }}&quot;? This cannot be undone.">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" title="Delete">🗑️</button>
+                                    <button type="submit" title="Delete" aria-label="Delete" class="row-action-danger">@include('admin.partials.icon', ['name' => 'trash', 'class' => ''])</button>
                                 </form>
                             </td>
                         </tr>
