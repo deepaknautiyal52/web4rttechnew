@@ -38,7 +38,7 @@
         "url": "https://web4rttech.com",
         "logo": "https://web4rttech.com/favicon.svg",
         "image": "https://web4rttech.com/og-image.png",
-        "description": "Digital-first IT services and consulting company offering web & mobile development, SEO, PPC, digital marketing, and AI & data science solutions.",
+        "description": "Digital-first IT services and consulting company offering web & mobile development, domain registration, web hosting, business email, SEO, PPC, digital marketing, and AI & data science solutions.",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Near Monal Farm",

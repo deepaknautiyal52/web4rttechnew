@@ -15,6 +15,7 @@
             <a href="{{ url('/') }}" class="{{ $navLink('/') }}">Home</a>
             <a href="{{ url('/about') }}" class="{{ $navLink('/about') }}">About</a>
             <a href="{{ url('/services') }}" class="{{ $navLink('/services') }}">Services</a>
+            <a href="{{ url('/services#hosting') }}">Domains &amp; Hosting</a>
             <a href="{{ url('/ventures') }}" class="{{ $navLink('/ventures') }}">Ventures</a>
             <a href="{{ url('/careers') }}" class="{{ $navLink('/careers') }}">Careers</a>
             <a href="{{ url('/contact') }}" class="{{ $navLink('/contact') }}">Contact</a>

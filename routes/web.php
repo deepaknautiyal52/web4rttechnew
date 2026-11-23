@@ -21,6 +21,7 @@ Route::view('/careers', 'pages.careers')->name('careers');
 Route::view('/ventures', 'pages.ventures')->name('ventures');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/contact', [SiteController::class, 'submitContact'])->middleware('throttle:10,1')->name('contact.store');
+Route::get('/domain-check', [SiteController::class, 'checkDomain'])->middleware('throttle:20,1')->name('domain.check');
 Route::view('/terms', 'pages.terms')->name('terms');
 Route::view('/privacy', 'pages.privacy')->name('privacy');
 Route::view('/cookies', 'pages.cookies')->name('cookies');

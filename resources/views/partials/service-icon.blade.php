@@ -11,6 +11,28 @@
     @case('cloud-services')
         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10Z" />
         @break
+    @case('domain-registration')
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+        @break
+    @case('web-hosting')
+        <rect x="2" y="3" width="20" height="8" rx="2" />
+        <rect x="2" y="13" width="20" height="8" rx="2" />
+        <line x1="6" y1="7" x2="6.01" y2="7" />
+        <line x1="6" y1="17" x2="6.01" y2="17" />
+        <line x1="10" y1="7" x2="18" y2="7" />
+        <line x1="10" y1="17" x2="18" y2="17" />
+        @break
+    @case('business-email')
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <polyline points="22 6 12 13 2 6" />
+        @break
+    @case('ssl-security')
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <rect x="9" y="11" width="6" height="5" rx="1" />
+        <path d="M10 11V9a2 2 0 0 1 4 0v2" />
+        @break
     @case('seo')
         <circle cx="11" cy="11" r="8" />
         <line x1="21" y1="21" x2="16.65" y2="16.65" />

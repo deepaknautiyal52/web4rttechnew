@@ -37,6 +37,9 @@
             <ul>
                 <li><a href="{{ url('/services/web-development') }}">Web Development</a></li>
                 <li><a href="{{ url('/services/mobile-app-development') }}">Mobile App Development</a></li>
+                <li><a href="{{ url('/services/domain-registration') }}">Domain Registration</a></li>
+                <li><a href="{{ url('/services/web-hosting') }}">Web Hosting</a></li>
+                <li><a href="{{ url('/services/business-email') }}">Business Email</a></li>
                 <li><a href="{{ url('/services/seo') }}">SEO</a></li>
                 <li><a href="{{ url('/services/ppc-google-ads') }}">PPC &amp; Google Ads</a></li>
                 <li><a href="{{ url('/services/ai-solutions') }}">AI Solutions</a></li>

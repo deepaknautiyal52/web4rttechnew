@@ -9,6 +9,7 @@
     $budgetRanges = ['Under $1,000', '$1,000 – $5,000', '$5,000 – $15,000', '$15,000 – $50,000', '$50,000+', 'Not sure yet'];
     $timelines = ['ASAP', '1–3 months', '3–6 months', '6+ months', 'Just exploring'];
     $service = old('service_interested', $preselectedService);
+    $domain = $domain ?? null;
 @endphp
 
 @section('content')
@@ -105,13 +106,13 @@
 
                         <div class="form-group">
                             <label for="subject">Subject *</label>
-                            <input type="text" id="subject" name="subject" value="{{ old('subject') }}" required placeholder="What is this about?" />
+                            <input type="text" id="subject" name="subject" value="{{ old('subject', $domain ? 'Domain registration: '.$domain : '') }}" required placeholder="What is this about?" />
                             @error('subject')<span class="field-error">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="form-group">
                             <label for="message">Message *</label>
-                            <textarea id="message" name="message" required placeholder="Tell us a bit more about what you're looking to build or achieve..." rows="6">{{ old('message') }}</textarea>
+                            <textarea id="message" name="message" required placeholder="Tell us a bit more about what you're looking to build or achieve..." rows="6">{{ old('message', $domain ? "I would like to register the domain {$domain}. Please get in touch with the next steps." : '') }}</textarea>
                             @error('message')<span class="field-error">{{ $message }}</span>@enderror
                         </div>
 

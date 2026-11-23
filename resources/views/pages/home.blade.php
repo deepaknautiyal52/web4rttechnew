@@ -1,12 +1,13 @@
 @extends('layouts.site', [
-    'title' => 'Web Development, Digital Marketing & AI Solutions',
-    'description' => 'Web4rtTech is a digital-first IT services and consulting company offering web & mobile development, SEO, PPC, digital marketing, and AI & data science solutions for businesses in India and worldwide.',
+    'title' => 'Web Development, Domains & Hosting, Digital Marketing & AI Solutions',
+    'description' => 'Web4rtTech is a digital-first IT services and consulting company offering web & mobile development, domain registration, web hosting, business email, SEO, PPC, digital marketing, and AI & data science solutions for businesses in India and worldwide.',
     'path' => '/',
 ])
 
 @php
     $slides = [
         ['id' => 'development', 'eyebrow' => 'Web & Mobile Development', 'title' => "Building Tomorrow's Technology, Today", 'description' => 'We design, build, and scale websites, apps, and cloud platforms that turn visitors into customers.', 'ctaLabel' => 'Explore Development', 'ctaTo' => '/services#development'],
+        ['id' => 'hosting', 'eyebrow' => 'Domains & Hosting', 'title' => 'Your Domain, Hosting & Email, Sorted', 'description' => 'Register your domain, host your website and get email on your own name, set up and supported by one local team.', 'ctaLabel' => 'Explore Domains & Hosting', 'ctaTo' => '/services#hosting'],
         ['id' => 'growth', 'eyebrow' => 'Digital Marketing & Growth', 'title' => 'Marketing That Gets You Found — and Chosen', 'description' => 'SEO, paid ads, and social strategy engineered around measurable growth, not vanity metrics.', 'ctaLabel' => 'Explore Growth Marketing', 'ctaTo' => '/services#growth'],
         ['id' => 'ai-data', 'eyebrow' => 'AI & Data Science', 'title' => 'Turn Data Into Decisions, Automatically', 'description' => 'Practical AI and analytics that automate the busywork and surface the insights that actually matter.', 'ctaLabel' => 'Explore AI & Data', 'ctaTo' => '/services#ai-data'],
     ];
@@ -26,6 +27,12 @@
     ];
 
     $featured = array_map(fn ($id) => \App\Support\Site::service($id), ['web-development', 'mobile-app-development', 'seo', 'ppc-google-ads', 'ai-solutions', 'data-science']);
+
+    // Domains & Hosting band: each service with its cheapest priced plan.
+    $hosting = array_map(function ($s) {
+        $from = collect($s['pricing'])->first(fn ($t) => $t['priceINR'] !== 'Custom Quote');
+        return $s + ['from' => $from ? $from['priceINR'].($from['billing'] ?? '') : null];
+    }, \App\Support\Site::servicesIn('hosting'));
 @endphp
 
 @section('content')
@@ -101,6 +108,37 @@
             </div>
             <div class="services-view-all">
                 <a href="{{ url('/services') }}" class="services-view-all-link">View All Services →</a>
+            </div>
+        </div>
+    </section>
+
+    {{-- Domains & Hosting Section --}}
+    <section class="hosting-section">
+        <div class="container">
+            <div class="hosting-header">
+                <div>
+                    <span class="hosting-eyebrow">Domains &amp; Hosting</span>
+                    <h2>Everything You Need to Get Online</h2>
+                    <p>Domain names, fast hosting, business email and SSL, from one team that also builds and markets your website.</p>
+                </div>
+                <div class="hosting-header-actions">
+                    <a href="{{ url('/services#hosting') }}" class="hosting-link">See All Plans →</a>
+                </div>
+            </div>
+            @include('partials.domain-search', ['theme' => 'dark'])
+            <div class="hosting-grid">
+                @foreach ($hosting as $service)
+                    <a href="{{ url('/services/'.$service['id']) }}" class="hosting-card">
+                        <div class="hosting-card-icon">
+                            @include('partials.service-icon', ['id' => $service['id']])
+                        </div>
+                        <h3>{{ $service['title'] }}</h3>
+                        <p>{{ $service['description'] }}</p>
+                        @if ($service['from'])
+                            <span class="hosting-price"><small>from</small> {{ $service['from'] }}</span>
+                        @endif
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>

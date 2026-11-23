@@ -1,5 +1,44 @@
 <div class="hero-art">
 @switch($variant ?? 'development')
+    @case('hosting')
+<svg viewBox="0 0 480 380" class="hero-art-svg">
+  <circle cx="400" cy="80" r="60" fill="rgba(255,255,255,0.08)" />
+  <circle cx="80" cy="300" r="55" fill="rgba(255,255,255,0.08)" />
+  <g filter="url(#soft-shadow-h)">
+    <rect x="70" y="70" width="230" height="62" rx="12" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.4)" />
+    <rect x="70" y="148" width="230" height="62" rx="12" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.4)" />
+    <rect x="70" y="226" width="230" height="62" rx="12" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.4)" />
+    <circle cx="98" cy="101" r="7" fill="#ffffff" />
+    <circle cx="98" cy="179" r="7" fill="#ffffff" />
+    <circle cx="98" cy="257" r="7" fill="#ffffff" opacity="0.7" />
+    <rect x="122" y="95" width="110" height="12" rx="6" fill="rgba(255,255,255,0.55)" />
+    <rect x="122" y="173" width="140" height="12" rx="6" fill="rgba(255,255,255,0.55)" />
+    <rect x="122" y="251" width="90" height="12" rx="6" fill="rgba(255,255,255,0.55)" />
+    <circle cx="275" cy="101" r="5" fill="#6EE7B7" />
+    <circle cx="275" cy="179" r="5" fill="#6EE7B7" />
+    <circle cx="275" cy="257" r="5" fill="#6EE7B7" />
+  </g>
+  <g filter="url(#soft-shadow-h)">
+    <circle cx="350" cy="190" r="72" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.45)" />
+    <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+      <circle cx="350" cy="190" r="44" />
+      <line x1="306" y1="190" x2="394" y2="190" />
+      <path d="M350 146a68 68 0 0 1 18 44 68 68 0 0 1-18 44 68 68 0 0 1-18-44 68 68 0 0 1 18-44Z" />
+    </g>
+  </g>
+  <g filter="url(#soft-shadow-h)">
+    <rect x="370" y="250" width="64" height="54" rx="12" fill="#ffffff" />
+    <path d="M388 250v-10a14 14 0 0 1 28 0v10" fill="none" stroke="#ffffff" stroke-width="6" />
+    <circle cx="402" cy="275" r="6" fill="#4F46E5" />
+    <rect x="399" y="278" width="6" height="12" rx="3" fill="#4F46E5" />
+  </g>
+  <defs>
+    <filter id="soft-shadow-h" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+</svg>
+        @break
     @case('growth')
 <svg viewBox="0 0 480 380" class="hero-art-svg">
   <circle cx="90" cy="70" r="60" fill="rgba(255,255,255,0.08)" />

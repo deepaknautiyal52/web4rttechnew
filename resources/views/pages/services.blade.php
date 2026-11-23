@@ -1,6 +1,6 @@
 @extends('layouts.site', [
     'title' => 'Our Services',
-    'description' => "Explore Web4rtTech's services: web & mobile development, cloud services, SEO, SMO, PPC & Google Ads, digital marketing strategy, AdSense monetization, AI solutions, and data science.",
+    'description' => "Explore Web4rtTech's services: web & mobile development, cloud services, domain registration, web hosting, business email, SSL, SEO, SMO, PPC & Google Ads, digital marketing strategy, AdSense monetization, AI solutions, and data science.",
     'path' => '/services',
 ])
 
@@ -10,7 +10,7 @@
         <div class="container page-hero-flex">
             <div class="page-hero-text">
                 <h1>Our Services</h1>
-                <p>Development, growth marketing, and AI/data solutions for businesses in India and worldwide</p>
+                <p>Development, domains &amp; hosting, growth marketing, and AI/data solutions for businesses in India and worldwide</p>
             </div>
             <div class="page-hero-illustration">
                 @include('partials.hero-illustration', ['variant' => 'services'])

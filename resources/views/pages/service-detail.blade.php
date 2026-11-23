@@ -50,6 +50,11 @@
             <a href="{{ url('/services') }}#{{ $category['id'] }}" class="service-eyebrow">{{ $category['title'] }}</a>
             <h1>{{ $service['title'] }}</h1>
             <p>{{ $service['description'] }}</p>
+            @if ($service['id'] === 'domain-registration')
+                <div class="service-hero-search">
+                    @include('partials.domain-search', ['theme' => 'dark'])
+                </div>
+            @endif
         </div>
     </section>
 
