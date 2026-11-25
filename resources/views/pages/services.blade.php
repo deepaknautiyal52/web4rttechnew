@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'title' => 'Our Services',
-    'description' => "Explore Web4rtTech's services: web & mobile development, cloud services, domain registration, web hosting, business email, SSL, SEO, SMO, PPC & Google Ads, digital marketing strategy, AdSense monetization, AI solutions, and data science.",
+    'title' => 'IT Services: Web, Hosting, SEO & AI',
+    'description' => 'Website & app development, domain registration, web hosting, SEO, Google Ads, digital marketing and AI services from Web4rtTech, Dehradun, India.',
     'path' => '/services',
 ])
 

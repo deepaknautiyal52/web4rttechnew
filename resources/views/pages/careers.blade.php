@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'title' => 'Careers',
-    'description' => "Join Web4rtTech's team and grow your career in web development, mobile apps, digital marketing, or AI & data science. View current openings and internship programs.",
+    'title' => 'Careers: IT Jobs & Internships in Dehradun',
+    'description' => 'IT jobs and internships in Dehradun at Web4rtTech. Grow your career in web development, mobile apps, digital marketing or AI. See current openings.',
     'path' => '/careers',
 ])
 

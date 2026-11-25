@@ -15,8 +15,8 @@
 @endphp
 
 @extends('layouts.site', [
-    'title' => 'Our Ventures',
-    'description' => 'Beyond IT services, the Web4rtTech family runs homestays in Uttarakhand, a real estate business, yoga & wellness programmes, and CCTV security and surveillance services.',
+    'title' => 'Our Ventures: Homestays, Real Estate & CCTV',
+    'description' => 'Beyond IT, the Web4rtTech family runs Uttarakhand homestays, a real estate business, yoga & wellness programmes and CCTV security services.',
     'path' => '/ventures',
     'jsonLd' => $jsonLd,
 ])

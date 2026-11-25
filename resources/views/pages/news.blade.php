@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'title' => 'Newsroom',
-    'description' => 'Latest press releases, product announcements, and insights from Web4rtTech.',
+    'title' => 'News & Insights: Web, SEO & AI Updates',
+    'description' => 'News, announcements and practical insights on web development, SEO, digital marketing and AI from the Web4rtTech team in Dehradun.',
     'path' => '/news',
 ])
 

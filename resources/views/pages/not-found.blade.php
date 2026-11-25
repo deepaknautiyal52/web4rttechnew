@@ -1,4 +1,4 @@
-@extends('layouts.site', ['title' => $heading, 'description' => $heading])
+@extends('layouts.site', ['title' => $heading, 'description' => $heading, 'noindex' => true])
 
 @section('content')
 <main class="container">

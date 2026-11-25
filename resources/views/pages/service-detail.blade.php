@@ -18,8 +18,8 @@
             'name' => $service['title'],
             'description' => $service['long'],
             'url' => "$url/services/{$service['id']}",
-            'areaServed' => 'Worldwide',
-            'provider' => ['@type' => 'Organization', 'name' => 'Web4rtTech', 'url' => $url],
+            'areaServed' => [['@type' => 'Country', 'name' => 'India'], 'Worldwide'],
+            'provider' => ['@id' => "$url/#organization"],
         ],
     ];
     if (!empty($service['faqs'])) {
@@ -34,11 +34,12 @@
         ];
     }
     $quoteUrl = url('/contact').'?service='.$service['id'];
+    $seo = config('site.service_seo.'.$service['id'], []);
 @endphp
 
 @extends('layouts.site', [
-    'title' => $service['title'],
-    'description' => $service['description'],
+    'title' => $seo['title'] ?? $service['title'],
+    'description' => $seo['description'] ?? $service['description'],
     'path' => '/services/'.$service['id'],
     'jsonLd' => $jsonLd,
 ])
@@ -74,6 +75,7 @@
                 </div>
                 <h2>Overview</h2>
                 <p>{{ $service['long'] }}</p>
+                <p class="service-location-note">Web4rtTech is based in Dehradun, Uttarakhand, and provides {{ $service['title'] }} services to businesses across India and worldwide.</p>
 
                 <h3>Key Offerings</h3>
                 <ul class="offerings-list">

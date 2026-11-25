@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /domain-check
 
 Sitemap: https://web4rttech.com/sitemap.xml

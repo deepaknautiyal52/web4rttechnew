@@ -1431,6 +1431,67 @@ return [
             'color' => '#0284C7',
         ],
     ],
+    // Search-engine title (before " | Web4rtTech", max ~48 characters) and
+    // description (max ~160 characters) per service page, built around the
+    // phrases people actually search for. Services not listed use their own title.
+    'service_seo' => [
+        'web-development' => [
+            'title' => 'Website Development Company in Dehradun',
+            'description' => 'Custom website and web app development in Dehradun, Uttarakhand. Fast, mobile-friendly Laravel, React & WordPress sites for businesses across India.',
+        ],
+        'mobile-app-development' => [
+            'title' => 'Mobile App Development Company in Dehradun',
+            'description' => 'Android and iOS app development in Dehradun. Cross-platform React Native apps, from first MVP to Play Store and App Store launch, for clients across India.',
+        ],
+        'cloud-services' => [
+            'title' => 'Cloud Services & AWS Consulting in India',
+            'description' => 'AWS, Azure and Google Cloud migration, DevOps and managed cloud services in India. Cut hosting costs and scale safely with Web4rtTech, Dehradun.',
+        ],
+        'domain-registration' => [
+            'title' => 'Domain Registration India: Buy .com & .in',
+            'description' => 'Buy a domain name in India. Check availability and register .com, .in and .co.in domains from ₹699/yr with free DNS management. Transfers welcome.',
+        ],
+        'web-hosting' => [
+            'title' => 'Web Hosting in India: WordPress & VPS',
+            'description' => 'Fast, secure web hosting in India from ₹199/mo. WordPress, Linux and VPS hosting with free SSL, daily backups and free migration. Local support from Dehradun.',
+        ],
+        'business-email' => [
+            'title' => 'Business Email Hosting & Google Workspace',
+            'description' => 'Professional email on your own domain from ₹99/user/mo, plus Google Workspace and Microsoft 365 setup and migration for businesses in India.',
+        ],
+        'ssl-security' => [
+            'title' => 'SSL Certificate & Website Security India',
+            'description' => 'Buy and install SSL certificates in India, including wildcard SSL, plus malware removal and firewall protection to keep your website secure.',
+        ],
+        'seo' => [
+            'title' => 'SEO Services in Dehradun | SEO Company India',
+            'description' => 'SEO company in Dehradun offering technical SEO, local SEO, on-page optimisation and link building to rank your business higher on Google across India.',
+        ],
+        'smo' => [
+            'title' => 'Social Media Marketing Agency in Dehradun',
+            'description' => 'Social media marketing and management in Dehradun for Instagram, Facebook and LinkedIn: content calendars, creatives and growth reporting.',
+        ],
+        'ppc-google-ads' => [
+            'title' => 'Google Ads & PPC Management in India',
+            'description' => 'Google Ads and Meta Ads management in India. ROI-focused PPC campaigns, retargeting and landing-page optimisation by Web4rtTech, Dehradun.',
+        ],
+        'digital-marketing' => [
+            'title' => 'Digital Marketing Agency in Dehradun',
+            'description' => 'Full-service digital marketing agency in Dehradun, Uttarakhand: SEO, Google Ads, social media and email marketing tied to one growth plan.',
+        ],
+        'adsense-monetization' => [
+            'title' => 'AdSense Approval & Website Monetization',
+            'description' => 'Get Google AdSense approval and earn more from your website. Ad placement strategy, RPM optimisation and policy compliance for publishers in India.',
+        ],
+        'ai-solutions' => [
+            'title' => 'AI Development & Chatbot Solutions in India',
+            'description' => 'AI chatbots, WhatsApp bots, workflow automation and custom machine-learning solutions for businesses in India, built by Web4rtTech, Dehradun.',
+        ],
+        'data-science' => [
+            'title' => 'Data Analytics & Power BI Services in India',
+            'description' => 'Data analytics, Power BI dashboards and predictive models that turn your business data into decisions. Data science services from Dehradun, India.',
+        ],
+    ],
     // Domain search: extensions we sell, first-year price (excl. GST). The first
     // five are also checked as suggestions for every search.
     'domain_extensions' => [

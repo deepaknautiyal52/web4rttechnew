@@ -642,7 +642,7 @@
   margin-bottom: 22px;
 }
 
-.hero-slide-content h1 {
+.hero-slide-content .hero-slide-title {
   font-size: 48px;
   font-weight: 800;
   line-height: 1.15;
@@ -784,7 +784,7 @@
     padding: 90px 40px;
   }
 
-  .hero-slide-content h1 {
+  .hero-slide-content .hero-slide-title {
     font-size: 38px;
   }
 }
@@ -819,7 +819,7 @@
     min-height: 560px;
   }
 
-  .hero-slide-content h1 {
+  .hero-slide-content .hero-slide-title {
     font-size: 28px;
   }
 
@@ -1143,6 +1143,25 @@
   text-align: center;
   color: #4F46E5;
   font-weight: 700;
+}
+
+.services-section h2:has(+ .services-section-intro) {
+  margin-bottom: 18px;
+}
+
+.services-section-intro {
+  max-width: 760px;
+  margin: 0 auto 50px;
+  text-align: center;
+  color: #555;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.service-location-note {
+  margin-top: 12px;
+  color: #666;
+  font-size: 15px;
 }
 
 .services-grid {

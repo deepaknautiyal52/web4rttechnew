@@ -26,6 +26,7 @@ Route::view('/terms', 'pages.terms')->name('terms');
 Route::view('/privacy', 'pages.privacy')->name('privacy');
 Route::view('/cookies', 'pages.cookies')->name('cookies');
 Route::view('/sitemap', 'pages.sitemap')->name('sitemap');
+Route::get('/sitemap.xml', fn () => response()->view('sitemap-xml')->header('Content-Type', 'application/xml; charset=UTF-8'))->name('sitemap.xml');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,12 +1,12 @@
 @extends('layouts.site', [
-    'title' => 'Web Development, Domains & Hosting, Digital Marketing & AI Solutions',
-    'description' => 'Web4rtTech is a digital-first IT services and consulting company offering web & mobile development, domain registration, web hosting, business email, SEO, PPC, digital marketing, and AI & data science solutions for businesses in India and worldwide.',
+    'title' => 'Web Development & IT Company in Dehradun',
+    'description' => 'Web4rtTech is an IT company in Dehradun offering website & app development, domain registration, web hosting, SEO and digital marketing across India.',
     'path' => '/',
 ])
 
 @php
     $slides = [
-        ['id' => 'development', 'eyebrow' => 'Web & Mobile Development', 'title' => "Building Tomorrow's Technology, Today", 'description' => 'We design, build, and scale websites, apps, and cloud platforms that turn visitors into customers.', 'ctaLabel' => 'Explore Development', 'ctaTo' => '/services#development'],
+        ['id' => 'development', 'eyebrow' => "Building Tomorrow's Technology, Today", 'title' => 'Web Development & IT Services in Dehradun', 'description' => 'We design, build, and scale websites, apps, and cloud platforms that turn visitors into customers.', 'ctaLabel' => 'Explore Development', 'ctaTo' => '/services#development'],
         ['id' => 'hosting', 'eyebrow' => 'Domains & Hosting', 'title' => 'Your Domain, Hosting & Email, Sorted', 'description' => 'Register your domain, host your website and get email on your own name, set up and supported by one local team.', 'ctaLabel' => 'Explore Domains & Hosting', 'ctaTo' => '/services#hosting'],
         ['id' => 'growth', 'eyebrow' => 'Digital Marketing & Growth', 'title' => 'Marketing That Gets You Found — and Chosen', 'description' => 'SEO, paid ads, and social strategy engineered around measurable growth, not vanity metrics.', 'ctaLabel' => 'Explore Growth Marketing', 'ctaTo' => '/services#growth'],
         ['id' => 'ai-data', 'eyebrow' => 'AI & Data Science', 'title' => 'Turn Data Into Decisions, Automatically', 'description' => 'Practical AI and analytics that automate the busywork and surface the insights that actually matter.', 'ctaLabel' => 'Explore AI & Data', 'ctaTo' => '/services#ai-data'],
@@ -44,7 +44,8 @@
                 <div class="hero-slide slide-{{ $slide['id'] }} {{ $i === 0 ? 'active' : '' }}" aria-hidden="{{ $i === 0 ? 'false' : 'true' }}">
                     <div class="hero-slide-content">
                         <span class="hero-slide-eyebrow">{{ $slide['eyebrow'] }}</span>
-                        <h1>{{ $slide['title'] }}</h1>
+                        {{-- One <h1> per page: the first slide's title. --}}
+                        <{{ $i === 0 ? 'h1' : 'h2' }} class="hero-slide-title">{{ $slide['title'] }}</{{ $i === 0 ? 'h1' : 'h2' }}>
                         <p>{{ $slide['description'] }}</p>
                         <div class="hero-slide-actions">
                             <a href="{{ url($slide['ctaTo']) }}" class="hero-slide-cta">{{ $slide['ctaLabel'] }}</a>
@@ -95,6 +96,11 @@
     <section class="services-section">
         <div class="container">
             <h2>Our Services</h2>
+            <p class="services-section-intro">
+                Web4rtTech is an IT company in Dehradun, Uttarakhand. We build websites and mobile apps, register
+                domains, host websites and business email, and grow businesses with SEO, Google Ads and digital
+                marketing, for clients across India and worldwide.
+            </p>
             <div class="services-grid">
                 @foreach ($featured as $service)
                     <a href="{{ url('/services/'.$service['id']) }}" class="service-card">

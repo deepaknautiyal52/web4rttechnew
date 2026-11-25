@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'title' => 'Contact Us / Get a Quote',
-    'description' => 'Get in touch with Web4rtTech for a free project quote. We reply within one business day and work with clients across India and internationally.',
+    'title' => 'Contact Us: Get a Free Quote',
+    'description' => 'Contact Web4rtTech in Dehradun for a free quote on websites, apps, hosting or SEO. Call +91-7417120232; we reply within one business day.',
     'path' => '/contact',
 ])
 

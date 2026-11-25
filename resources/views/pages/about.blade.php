@@ -1,6 +1,6 @@
 @extends('layouts.site', [
-    'title' => 'About Us',
-    'description' => 'Web4rtTech is a technology partner for businesses that want to move faster — we design, build, and scale digital products, cloud platforms, and AI-driven solutions.',
+    'title' => 'About Us: IT Company in Dehradun, Uttarakhand',
+    'description' => 'Web4rtTech is an IT services company in Dehradun, Uttarakhand. We build websites, apps and cloud platforms and grow businesses with SEO and digital marketing.',
     'path' => '/about',
 ])
 
@@ -23,9 +23,10 @@
         <div class="about-section">
           <h2>Who We Are</h2>
           <p>
-            Web4rtTech is a technology partner for businesses that want to move faster. We design,
-            build, and scale digital products, cloud platforms, and AI-driven solutions that
-            help organizations navigate their next chapter of growth.
+            Web4rtTech is a technology partner for businesses that want to move faster. Based in
+            Dehradun, Uttarakhand, we design, build, and scale websites, mobile apps, cloud platforms,
+            and AI-driven solutions for clients across India and worldwide, helping organizations
+            navigate their next chapter of growth.
           </p>
         </div>
 
